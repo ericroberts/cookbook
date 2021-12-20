@@ -1,30 +1,30 @@
 ingredients:
-- name: cream cheese
-  amount: 4@oz
-- name: egg
-  amount: '1'
 - name: salt
   amount: 0.75 tsp
-- name: sugar
-  amount: 0.25 cups
+- name: vanilla extract
+  amount: 0.5 tsp
 - name: brown sugar
   amount: 0.67 cups
-- name: flour
-  amount: 420 g
-- name: melted butter
-  amount: 0.25 cups
-- name: yeast
-  amount: 2.2 tsp
 - name: cinnamon
   amount: 1.5 tbsp
+- name: yeast
+  amount: 2.2 tsp
+- name: icing sugar
+  amount: 0.75 cups
+- name: melted butter
+  amount: 0.25 cups
+- name: softened butter
+  amount: 0.25 cups, 3 tbsp
 - name: egg yolk
   amount: '1'
-- name: softened butter
-  amount: 3@tbsp, 0.25 cups
-- name: icing sugar
-  amount: 0.75@cup
-- name: vanilla extract
-  amount: 1/2@tsp
+- name: sugar
+  amount: 0.25 cups
+- name: egg
+  amount: '1'
+- name: cream cheese
+  amount: 4 ozs
+- name: flour
+  amount: 420 g
 - name: milk
   amount: 0.75 cups
 cookware: []
