@@ -1,14 +1,14 @@
 ingredients:
 - name: salt
   amount: 14 g
-- name: yeast
-  amount: 1.4 tbsp
 - name: flour
   amount: 580 g
 - name: oil
   amount: 11g
 - name: lukewarm water
   amount: 400 g
+- name: yeast
+  amount: 1.4 tsp
 cookware:
 - name: bowl
 - name: 12-inch cast iron skillets
