@@ -1,18 +1,20 @@
 ingredients:
-- name: oil
-  amount: 11g
 - name: salt
   amount: 14 g
+- name: yeast
+  amount: 1.4 tbsp
 - name: flour
   amount: 580 g
+- name: oil
+  amount: 11g
 - name: lukewarm water
   amount: 400 g
 cookware:
 - name: bowl
 - name: 12-inch cast iron skillets
 steps:
-- description: Combine flour, salt, lukewarm water, and oil in a large bowl. Mix with
-    hands or a wooden spoon until no dry flour remains.
+- description: Combine flour, salt, yeast, lukewarm water, and oil in a large bowl.
+    Mix with hands or a wooden spoon until no dry flour remains.
 - description: "Cover tightly, then let rest at cool room temperature (no warmer than
     75\xB0F) for at least 8 hours and up to 24 hours. Dough should rise dramatically
     and fill bowl. In a hot kitchen, the dough may overproof near the end of that
