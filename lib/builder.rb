@@ -4,9 +4,6 @@ require_relative "recipe"
 
 class Builder
   def self.build
-    puts "generating CSS"
-    puts system("npx tailwindcss -i ./src/input.css -o ./dist/styles.css")
-
     layout = Slim::Template.new("src/templates/layout.slim")
 
     recipes = Dir.glob("src/recipes/*.yml").map do |f|
@@ -26,5 +23,8 @@ class Builder
       File.write("dist/recipes/#{recipe.slug}/index.html", layout.render { recipe.render })
       puts "#{recipe.slug} written"
     end
+
+    puts "generating CSS"
+    puts system("npx tailwindcss -i ./src/input.css -o ./dist/styles.css")
   end
 end
