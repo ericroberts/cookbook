@@ -11,6 +11,7 @@ class Builder
       Recipe.from_path(f)
     end
 
+    FileUtils.mkdir_p("dist/")
     File.write(
       "dist/index.html",
       layout.render { Slim::Template.new("src/templates/recipes.slim").render(recipes) },
@@ -19,7 +20,7 @@ class Builder
     puts "Index written"
 
     recipes.each do |recipe|
-      FileUtils.mkdir_p "dist/recipes/#{recipe.slug}"
+      FileUtils.mkdir_p("dist/recipes/#{recipe.slug}")
       File.write("dist/recipes/#{recipe.slug}/index.html", layout.render { recipe.render })
       puts "#{recipe.slug} written"
     end
