@@ -1,0 +1,17 @@
+h1.text-6xl.leading-none.font-extrabold.tracking-tight.mb-16 = title
+
+h2.leading-none.font-extrabold.tracking-tight.text-3xl.mb-4 Ingredients
+
+ul.flow-root.mb-16
+  - ingredients.each do |ingredient|
+    li.border-b-2.border-slate-200 class="last-of-type:border-0"
+      dl.flex.font-extralight.text-xl
+        dt.flex-1.py-2 = ingredient.name
+        dd.py-2 = ingredient.amount
+
+h2.leading-none.font-extrabold.tracking-tight.text-3xl.mb-4 Steps
+
+ul.list-disc.ml-4
+  - steps.each do |step|
+    li.mb-8.text-l.leading-relaxed.font-light
+      = step.description
