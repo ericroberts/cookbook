@@ -1,7 +1,7 @@
 require "fileutils"
 require "slim"
 
-require "parser"
+require "recipe"
 
 class Builder
   def self.build
@@ -10,7 +10,7 @@ class Builder
     layout = Slim::Template.new("src/templates/layout.slim")
 
     recipes = Dir.glob("src/recipes/*.cook").map do |f|
-      Parser.from_cookfile(f)
+      Recipe.from_cookfile(f)
     end
 
     FileUtils.mkdir_p("dist/")

@@ -1,10 +1,10 @@
 require "minitest/autorun"
 require "yaml"
-require "parser"
+require "recipe"
 
 canonical = YAML.load_file("spec/canonical.yml")
 
-describe Parser do
+describe Recipe do
   describe "canonical" do
     tests = canonical.fetch("tests").to_a
     if tests.any? { |_, t| t.fetch("focus", false) }
@@ -14,7 +14,7 @@ describe Parser do
       it(name) do
         assert_equal(
           test.fetch("result"),
-          Parser.new(test.fetch("source")).to_h,
+          Recipe.from_cooklang(name, test.fetch("source")).to_h,
         )
       end
     end
@@ -48,7 +48,11 @@ describe Parser do
           ],
           "metadata" => [],
         },
-        Parser.new("Put @salt and @pepper{1%tsp} in the pan and push it.").to_h
+        Recipe
+          .from_cooklang(
+            "Recipe title",
+            "Put @salt and @pepper{1%tsp} in the pan and push it.",
+          ).to_h
       )
     end
 
@@ -75,7 +79,10 @@ describe Parser do
           ],
           "metadata" => [],
         },
-        Parser.new("Into the #pan put the @tomatoes{3%cups}").to_h
+        Recipe.from_cooklang(
+          "Recipe title",
+          "Into the #pan put the @tomatoes{3%cups}",
+        ).to_h
       )
     end
 
@@ -90,7 +97,10 @@ describe Parser do
           ],
           "metadata" => [],
         },
-        Parser.new("This is a step with a hyphenated-word.").to_h,
+        Recipe.from_cooklang(
+          "Recipe title",
+          "This is a step with a hyphenated-word.",
+        ).to_h,
       )
     end
   end
