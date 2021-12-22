@@ -1,6 +1,6 @@
 require "minitest/autorun"
 require "yaml"
-require_relative "../parser"
+require "parser"
 
 canonical = YAML.load_file("spec/canonical.yml")
 
