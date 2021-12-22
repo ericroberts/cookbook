@@ -76,7 +76,8 @@ class StepParser
       elsif @buffer.peek(2) == "--"
         @buffer.skip_until(/\n|\Z/)
       else
-        @parts << Text.from_cooklang(@buffer.scan_until(/^[^@#~\-\n\Z]*/))
+        text = @buffer.scan_until(/^([^@#~\n\Z])*/).sub(/--.*/, "")
+        @parts << Text.from_cooklang(text)
       end
     end
   end

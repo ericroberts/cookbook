@@ -78,5 +78,20 @@ describe Parser do
         Parser.new("Into the #pan put the @tomatoes{3%cups}").to_h
       )
     end
+
+    it "should be able handle hyphenated words" do
+      assert_equal(
+        {
+          "steps" => [
+            [{
+              "type" => "text",
+              "value" => "This is a step with a hyphenated-word."
+            }],
+          ],
+          "metadata" => [],
+        },
+        Parser.new("This is a step with a hyphenated-word.").to_h,
+      )
+    end
   end
 end
