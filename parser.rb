@@ -19,6 +19,12 @@ class Parser
     }
   end
 
+protected
+
+  def step_lines
+    lines.select { |l| l.is_a?(StepParser) }.reject(&:empty?)
+  end
+
   def metadata_hash
     if metadata_lines.any?
       metadata_lines.reduce({}) do |metadata_hash, metadata_line|
@@ -29,14 +35,8 @@ class Parser
     end
   end
 
-protected
-
   def metadata_lines
     lines.select { |l| l.is_a?(Metadata) }
-  end
-
-  def step_lines
-    lines.select { |l| l.is_a?(StepParser) }.reject(&:empty?)
   end
 end
 
