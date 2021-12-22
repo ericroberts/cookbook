@@ -6,6 +6,10 @@ class NullAmount
   def unit
     ""
   end
+
+  def to_s
+    quantity
+  end
 end
 
 class Amount
