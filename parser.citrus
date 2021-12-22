@@ -1,0 +1,47 @@
+require "parser"
+
+grammar CookLangParser
+	rule recipe
+		((/\s*/ item:(metadata | ingredient | cookware | timer | .) /\s*/)+) {
+			captures[:item].map(&:value)
+		}
+	end
+
+	rule ingredient
+		("@" name:~"{" "{" quantity? "}" | "@" name:/\w+/) {
+			Ingredient.new(capture(:name).value, capture(:quantity)&.value)
+		}
+	end
+
+	rule quantity
+		(amount:~[}%] ("%" unit:/\w+/)?) {
+			Amount.new(capture(:amount).value, capture(:unit)&.value)
+		}
+	end
+
+	rule cookware
+		("#" name:~"{" "{" quantity? "}" | "#" name:/\w+/) {
+			Cookware.new(capture(:name).value, capture(:quantity)&.value)
+		}
+	end
+
+	rule timer
+		("~" name:~"{"? "{" quantity? "}") {
+			Timer.new(capture(:name)&.value, capture(:quantity)&.value)
+		}
+	end
+
+	rule metadata
+		(/^/ ">>" /\s*/ key:~/[:\s]/ /\s*/ ":" /\s*/ value:~end_of_line end_of_line) {
+			Metadata.new(capture(:key).value, capture(:value).value)
+		}
+	end
+
+	rule comment
+		"--" ~end_of_line end_of_line
+	end
+
+	rule end_of_line
+		/\n/ | /\r\n/
+	end
+end
