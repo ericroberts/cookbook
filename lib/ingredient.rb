@@ -24,7 +24,7 @@ class Ingredient
   end
 
   def to_s
-    "#{name} #{amount}"
+    "#{name}"
   end
 
   def quantity

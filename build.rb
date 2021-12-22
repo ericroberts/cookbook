@@ -1,3 +1,3 @@
-require_relative "lib/builder"
+require "builder"
 
 Builder.build

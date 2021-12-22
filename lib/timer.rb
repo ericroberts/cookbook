@@ -29,5 +29,9 @@ class Timer
       "units" => units
     }
   end
+
+  def to_s
+    "#{quantity} #{units}"
+  end
 end
 

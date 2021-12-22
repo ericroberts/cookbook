@@ -18,5 +18,9 @@ class Cookware
       "quantity" => quantity,
     }
   end
+
+  def to_s
+    name
+  end
 end
 

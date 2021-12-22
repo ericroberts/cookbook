@@ -1,6 +1,6 @@
 require "sinatra"
 require "pry"
-require_relative "lib/builder"
+require "builder"
 
 before do
   Builder.build

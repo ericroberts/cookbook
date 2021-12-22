@@ -34,6 +34,6 @@ class Amount
   end
 
   def to_s
-    "#{quantity}#{unit}"
+    "#{quantity.to_f} #{unit}"
   end
 end

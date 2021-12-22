@@ -1,4 +1,5 @@
 require "active_support/core_ext/object/blank"
+require "pathname"
 require "strscan"
 
 require "amount"
@@ -8,12 +9,45 @@ require "metadata"
 require "text"
 require "timer"
 
+class Recipe
+  def initialize(title, steps, metadata)
+    @title = title
+    @steps = steps
+    @metadata = metadata
+  end
+
+  attr_reader :title, :steps, :metadata
+
+  def slug
+    title.downcase.gsub(" ", "-")
+  end
+
+  def render
+    Slim::Template.new("src/templates/recipe.slim").render(self)
+  end
+
+  def ingredients
+    steps.flat_map(&:ingredients)
+  end
+end
+
 class Parser
   def initialize(recipe_str)
     @lines =
       recipe_str
         .split(/\n/)
         .map(&LineParser.method(:parse))
+  end
+
+  def self.from_cookfile(path_string)
+    path = Pathname.new(path_string)
+    title = File.basename(path, ".cook").split("-").map(&:capitalize).join(" ")
+    parser = new(File.read(path))
+    Recipe.new(
+      title,
+      parser.step_lines,
+      parser.metadata_lines,
+    )
   end
 
   attr_reader :lines
@@ -24,8 +58,6 @@ class Parser
       "metadata" => metadata_hash,
     }
   end
-
-protected
 
   def step_lines
     lines.select { |l| l.is_a?(StepParser) }.reject(&:empty?)
@@ -51,7 +83,7 @@ class LineParser
     if str.start_with?(">>")
       Metadata.from_cooklang(str)
     else
-      StepParser.new(str)
+      StepParser.from_cooklang(str)
     end
   end
 end
@@ -61,6 +93,10 @@ class StepParser
     @buffer = StringScanner.new(step_str)
     @parts = []
     parse
+  end
+
+  def self.from_cooklang(step_str)
+    new(step_str)
   end
 
   attr_reader :metadata
@@ -98,5 +134,13 @@ class StepParser
 
   def to_h
     @parts.map(&:to_h)
+  end
+
+  def ingredients
+    @parts.select { |p| p.is_a?(Ingredient) }
+  end
+
+  def description
+    @parts.map(&:to_s).join
   end
 end

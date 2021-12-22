@@ -1,31 +1,32 @@
 require "fileutils"
 require "slim"
-require_relative "recipe"
+
+require "parser"
 
 class Builder
   def self.build
+    FileUtils.remove_dir("dist")
+
     layout = Slim::Template.new("src/templates/layout.slim")
 
-    recipes = Dir.glob("src/recipes/*.yml").map do |f|
-      filename = File.basename(f, ".yml")
-      Recipe.from_path(f)
+    recipes = Dir.glob("cookfiles/*.cook").map do |f|
+      Parser.from_cookfile(f)
     end
 
     FileUtils.mkdir_p("dist/")
     File.write(
       "dist/index.html",
-      layout.render { Slim::Template.new("src/templates/recipes.slim").render(recipes) },
+      layout.render { Slim::Template.new("src/templates/recipes.slim").render(recipes) }
     )
-
     puts "Index written"
 
     recipes.each do |recipe|
       FileUtils.mkdir_p("dist/recipes/#{recipe.slug}")
       File.write("dist/recipes/#{recipe.slug}/index.html", layout.render { recipe.render })
-      puts "#{recipe.slug} written"
+      puts "#{recipe.title} written"
     end
 
-    puts "generating CSS"
+    puts "Generating CSS"
     puts system("npx tailwindcss -i ./src/input.css -o ./dist/styles.css")
   end
 end
