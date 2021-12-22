@@ -9,7 +9,7 @@ class Builder
 
     layout = Slim::Template.new("src/templates/layout.slim")
 
-    recipes = Dir.glob("cookfiles/*.cook").map do |f|
+    recipes = Dir.glob("src/recipes/*.cook").map do |f|
       Parser.from_cookfile(f)
     end
 
