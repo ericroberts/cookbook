@@ -5,7 +5,7 @@ require "parser"
 
 class Builder
   def self.build
-    FileUtils.remove_dir("dist")
+    FileUtils.remove_dir("dist") if File.exist?("dist")
 
     layout = Slim::Template.new("src/templates/layout.slim")
 
