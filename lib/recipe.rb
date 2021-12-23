@@ -2,8 +2,7 @@ require "active_support/core_ext/object/blank"
 require "pathname"
 require "slim"
 
-require "metadata"
-require "step"
+require "line"
 
 class Recipe
   def initialize(title, steps, metadata)
@@ -24,17 +23,7 @@ class Recipe
     lines =
       recipe_str
         .split(/\n/)
-        .map do |line_str|
-          if line_str.start_with?(">>")
-            Metadata.from_cooklang(line_str)
-          elsif line_str.start_with?("--")
-            nil
-          elsif line_str.blank?
-            nil
-          else
-            Step.from_cooklang(line_str)
-          end
-        end.compact
+        .map(&Line.method(:from_cooklang))
 
     new(
       title,
