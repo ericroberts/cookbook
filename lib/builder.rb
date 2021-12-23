@@ -16,7 +16,7 @@ class Builder
     FileUtils.mkdir_p("dist/")
     File.write(
       "dist/index.html",
-      layout.render { Slim::Template.new("src/templates/recipes.slim").render(recipes) }
+      layout.render { Slim::Template.new("src/templates/index.slim").render(recipes) }
     )
     puts "Index written"
 
