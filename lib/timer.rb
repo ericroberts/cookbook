@@ -1,6 +1,9 @@
 require "step"
+require "scan"
 
 class Timer
+  extend Scan
+
   def initialize(name, quantity, units)
     @name = name
     @quantity = quantity
@@ -21,10 +24,6 @@ class Timer
         new(name, quantity, units)
       end
     end
-  end
-
-  def self.parse_part(buffer)
-    Step.parse_part(buffer, self)
   end
 
   def to_h

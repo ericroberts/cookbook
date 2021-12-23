@@ -22,20 +22,10 @@ class Step
         "~" => Timer,
       }.fetch(buffer.peek(1), Text)
 
-      parts << part_type.parse_part(buffer)
+      parts << part_type.scan(buffer)
     end
 
     new(parts)
-  end
-
-  def self.parse_part(buffer, part_type)
-    buffer.getch
-    possible_part = buffer.check_until(/}/)
-    if possible_part.nil? || possible_part.match?(/@|#|~/)
-      part_type.from_cooklang(buffer.scan_until(/^[^\s]*/))
-    else
-      part_type.from_cooklang(buffer.scan_until(/}/))
-    end
   end
 
   def ingredients

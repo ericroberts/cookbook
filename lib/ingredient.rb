@@ -1,7 +1,10 @@
 require "amount"
+require "scan"
 require "step"
 
 class Ingredient
+  extend Scan
+
   def initialize(name, amount)
     @name = name
     @amount = amount
@@ -22,10 +25,6 @@ class Ingredient
         NullAmount.new,
       )
     end
-  end
-
-  def self.parse_part(buffer)
-    Step.parse_part(buffer, self)
   end
 
   def to_s

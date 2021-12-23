@@ -9,7 +9,7 @@ class Text
     new(str)
   end
 
-  def self.parse_part(buffer)
+  def self.scan(buffer)
     from_cooklang(
       buffer.scan_until(/^([^@#~\n\Z])*/).sub(/--.*/, "")
     )

@@ -1,6 +1,9 @@
 require "step"
+require "scan"
 
 class Cookware
+  extend Scan
+
   def initialize(name, quantity)
     @name = name
     @quantity = quantity
@@ -11,10 +14,6 @@ class Cookware
   def self.from_cooklang(str)
     name, quantity = str.split("{").map(&:strip)
     new(name, quantity&.sub("}", "") || "")
-  end
-
-  def self.parse_part(buffer)
-    Step.parse_part(buffer, self)
   end
 
   def to_h
