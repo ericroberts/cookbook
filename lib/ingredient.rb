@@ -1,4 +1,5 @@
 require "amount"
+require "step"
 
 class Ingredient
   def initialize(name, amount)
@@ -21,6 +22,10 @@ class Ingredient
         NullAmount.new,
       )
     end
+  end
+
+  def self.parse_part(buffer)
+    Step.parse_part(buffer, self)
   end
 
   def to_s

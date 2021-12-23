@@ -16,18 +16,13 @@ class Step
     buffer = StringScanner.new(step_str)
     parts = []
     until buffer.eos?
-      if buffer.peek(1) == "@"
-        parts << parse_part(buffer, Ingredient)
-      elsif buffer.peek(1) == "#"
-        parts << parse_part(buffer, Cookware)
-      elsif buffer.peek(1) == "~"
-        parts << parse_part(buffer, Timer)
-      elsif buffer.peek(2) == "--"
-        buffer.skip_until(/\n|\Z/)
-      else
-        text = buffer.scan_until(/^([^@#~\n\Z])*/).sub(/--.*/, "")
-        parts << Text.from_cooklang(text)
-      end
+      part_type = {
+        "@" => Ingredient,
+        "#" => Cookware,
+        "~" => Timer,
+      }.fetch(buffer.peek(1), Text)
+
+      parts << part_type.parse_part(buffer)
     end
 
     new(parts)

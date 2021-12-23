@@ -9,6 +9,12 @@ class Text
     new(str)
   end
 
+  def self.parse_part(buffer)
+    from_cooklang(
+      buffer.scan_until(/^([^@#~\n\Z])*/).sub(/--.*/, "")
+    )
+  end
+
   def to_h
     {
       "type" => "text",

@@ -1,3 +1,5 @@
+require "step"
+
 class Timer
   def initialize(name, quantity, units)
     @name = name
@@ -19,6 +21,10 @@ class Timer
         new(name, quantity, units)
       end
     end
+  end
+
+  def self.parse_part(buffer)
+    Step.parse_part(buffer, self)
   end
 
   def to_h

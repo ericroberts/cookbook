@@ -1,3 +1,4 @@
+require "active_support/core_ext/object/blank"
 require "pathname"
 require "slim"
 
@@ -26,14 +27,18 @@ class Recipe
         .map do |line_str|
           if line_str.start_with?(">>")
             Metadata.from_cooklang(line_str)
+          elsif line_str.start_with?("--")
+            nil
+          elsif line_str.blank?
+            nil
           else
             Step.from_cooklang(line_str)
           end
-        end
+        end.compact
 
     new(
       title,
-      lines.select { |l| l.is_a?(Step) }.reject(&:empty?),
+      lines.select { |l| l.is_a?(Step) },
       lines.select { |l| l.is_a?(Metadata) },
     )
   end
