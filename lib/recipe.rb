@@ -51,6 +51,8 @@ class Recipe
     }
   end
 
+protected
+
   def metadata_hash
     if metadata.any?
       metadata.reduce({}) do |metadata_hash, metadata_line|
