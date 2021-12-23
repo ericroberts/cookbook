@@ -1,4 +1,5 @@
-require "minitest/autorun"
+require "spec_helper"
+
 require "yaml"
 require "recipe"
 
