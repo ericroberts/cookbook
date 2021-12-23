@@ -1,6 +1,6 @@
 require "active_support/core_ext/object/blank"
 
-class NullAmount
+class Some
   def quantity
     "some"
   end
@@ -12,6 +12,9 @@ class NullAmount
   def to_s
     quantity
   end
+end
+
+class None
 end
 
 class Amount
@@ -50,7 +53,7 @@ class Amount
   def self.from_cooklang(str)
     quantity, unit = str.split("%")
     if quantity.blank? && unit.blank?
-      NullAmount.new
+      Some.new
     elsif quantity.blank? && unit.present?
       new("", unit.strip)
     elsif quantity.start_with?("0")

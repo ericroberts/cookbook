@@ -22,7 +22,7 @@ class Ingredient
     else
       new(
         name,
-        NullAmount.new,
+        Some.new,
       )
     end
   end
