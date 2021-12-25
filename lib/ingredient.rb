@@ -31,21 +31,11 @@ class Ingredient
     "#{name}"
   end
 
-  def quantity
-    amount.quantity
-  end
-
-  def unit
-    amount.unit
-  end
-
   def to_h
     {
       "type" => "ingredient",
       "name" => name,
-      "quantity" => quantity,
-      "units" => unit,
-    }
+    }.merge(amount.to_h)
   end
 end
 

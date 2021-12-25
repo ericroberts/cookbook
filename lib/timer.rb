@@ -25,9 +25,7 @@ class Timer
     {
       "type" => "timer",
       "name" => name,
-      "quantity" => amount.quantity,
-      "units" => amount.unit,
-    }
+    }.merge(amount.to_h)
   end
 
   def to_s

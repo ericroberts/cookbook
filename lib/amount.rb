@@ -16,6 +16,13 @@ class Some
   def ==(other)
     other.is_a?(Some)
   end
+
+  def to_h
+    {
+      "quantity" => quantity,
+      "units" => unit,
+    }
+  end
 end
 
 class None
@@ -82,5 +89,12 @@ class Amount
     else
       "#{quantity} #{unit}"
     end
+  end
+
+  def to_h
+    {
+      "quantity" => quantity,
+      "units" => unit,
+    }
   end
 end
