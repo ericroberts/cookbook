@@ -40,4 +40,32 @@ describe Amount do
       assert_equal "1.4", Amount.format_fraction(1.4)
     end
   end
+
+  describe ".from_cooklang" do
+    subject { Amount.from_cooklang(str) }
+
+    describe "when string is empty" do
+      let(:str) { "" }
+
+      it "should return a Some" do
+        assert_kind_of Some, subject
+      end
+    end
+
+    describe "when string has divider but nothing else" do
+      let(:str) { "%" }
+
+      it "should return a Some" do
+        assert_kind_of Some, subject
+      end
+    end
+
+    describe "when string has divider with whitespace on either side" do
+      let(:str) { " % " }
+
+      it "should return a Some" do
+        assert_kind_of Some, subject
+      end
+    end
+  end
 end

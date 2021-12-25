@@ -12,6 +12,10 @@ class Some
   def to_s
     quantity
   end
+
+  def ==(other)
+    other.is_a?(Some)
+  end
 end
 
 class None
