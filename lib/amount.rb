@@ -60,10 +60,11 @@ class Amount
       Some.new
     elsif quantity.blank? && unit.present?
       new("", unit.strip)
-    elsif quantity.start_with?("0")
-      # TODO: This is broken. Try putting 0.25 as quantity in cookfile.
-      # It will put it in as a string and then prevent it from being
-      # formatted as a fraction.
+    elsif quantity.start_with?("0") && quantity.include?("/")
+      # This is for testFractionsLike from canonical.yml. I don't necessarily
+      # agree with this rule. I needed to have `quantity.include("/")` because
+      # otherwise it would break parsing for 0.25. This rule still seems crappy
+      # to me, ideally I'll figure out something better later.
       new(quantity, unit&.strip)
     else
       begin

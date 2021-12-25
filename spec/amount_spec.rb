@@ -32,7 +32,7 @@ describe Amount do
       assert_equal "⅔", Amount.format_fraction(0.666666)
     end
 
-    it "should work with 1/4" do
+    it "should not put a 0 in front of 1/4" do
       assert_equal "¼", Amount.format_fraction(Rational("1/4"))
     end
 
@@ -65,6 +65,30 @@ describe Amount do
 
       it "should return a Some" do
         assert_kind_of Some, subject
+      end
+    end
+
+    describe "when quantity starts with 0 and looks like a fraction" do
+      let(:str) { "01/2" }
+
+      it "should pass the quantity through unchanged" do
+        assert_equal "01/2", subject.quantity
+      end
+    end
+
+    describe "when quantity starts with 0 and is a decimal" do
+      let(:str) { "0.25" }
+
+      it "should convert it to a number" do
+        assert_equal 0.25, subject.quantity
+      end
+    end
+
+    describe "when quantity is not a number" do
+      let(:str) { "a few%dollops" }
+
+      it "should pass it through unchanged" do
+        assert_equal "a few", subject.quantity
       end
     end
   end
