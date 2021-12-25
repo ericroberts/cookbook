@@ -29,7 +29,7 @@ class Timer
   end
 
   def to_s
-    "#{amount.quantity} #{amount.units}"
+    amount.to_s
   end
 end
 
