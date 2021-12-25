@@ -54,12 +54,13 @@ class Amount
     end
   end
 
-  def self.from_cooklang(str)
+  # TODO: Handle no quantity and no units for timer case??
+  def self.from_cooklang(str, default_quantity: "")
     quantity, unit = str.split("%")
     if quantity.blank? && unit.blank?
       Some.new
     elsif quantity.blank? && unit.present?
-      new("", unit.strip)
+      new(default_quantity, unit.strip)
     elsif quantity.start_with?("0") && quantity.include?("/")
       # This is for testFractionsLike from canonical.yml. I don't necessarily
       # agree with this rule. I needed to have `quantity.include("/")` because

@@ -91,5 +91,45 @@ describe Amount do
         assert_equal "a few", subject.quantity
       end
     end
+
+    describe "when quantity is blank but unit is present" do
+      let(:str) { "%pinch" }
+
+      it "should have a blank quantity" do
+        assert_empty subject.quantity
+      end
+
+      it "should have the unit it was given" do
+        assert_equal "pinch", subject.unit
+      end
+    end
+
+    describe "when no unit is provided" do
+      let(:str) { "three" }
+
+      it "should have a blank unit" do
+        assert_empty subject.unit
+      end
+    end
+
+    describe "when a fraction is provided with whitespace" do
+      let(:str) { "1 / 2" }
+
+      it "should properly parse the number" do
+        assert_equal 0.5, subject.quantity
+      end
+    end
+
+    describe "when quantity is blank and default quantity is provided" do
+      it "should use the provided quantity" do
+        assert_equal(
+          144,
+          Amount.from_cooklang(
+            "%minutes",
+            default_quantity: 144,
+          ).quantity,
+        )
+      end
+    end
   end
 end

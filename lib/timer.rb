@@ -1,42 +1,37 @@
+require "amount"
 require "step"
 require "scan"
 
 class Timer
   extend Scan
 
-  def initialize(name, quantity, units)
+  def initialize(name, amount)
     @name = name
-    @quantity = quantity
-    @units = units
+    @amount = amount
   end
 
-  attr_reader :name, :quantity, :units
+  attr_reader :name, :amount
 
   def self.from_cooklang(str)
-    name, amount = str.split("{")
-    quantity, units = amount.sub("}", "").split("%")
-    if quantity.blank?
-      new(name, 0, units)
-    else
-      begin
-        new(name, Rational(quantity), units)
-      rescue ArgumentError
-        new(name, quantity, units)
-      end
-    end
+    name, amount_str = str.split("{")
+    amount = Amount.from_cooklang(
+      amount_str.sub(/\}\Z/, ""),
+      default_quantity: 0,
+    )
+    new(name, amount)
   end
 
   def to_h
     {
       "type" => "timer",
       "name" => name,
-      "quantity" => quantity,
-      "units" => units
+      "quantity" => amount.quantity,
+      "units" => amount.unit,
     }
   end
 
   def to_s
-    "#{quantity} #{units}"
+    "#{amount.quantity} #{amount.units}"
   end
 end
 
