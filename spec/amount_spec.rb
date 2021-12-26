@@ -47,24 +47,36 @@ describe Amount do
     describe "when string is empty" do
       let(:str) { "" }
 
-      it "should return a Some" do
-        assert_kind_of Some, subject
+      it "should have a quantity of 'some'" do
+        assert_equal "some", subject.quantity
+      end
+
+      it "should have no units" do
+        assert_nil subject.unit
       end
     end
 
     describe "when string has divider but nothing else" do
       let(:str) { "%" }
 
-      it "should return a Some" do
-        assert_kind_of Some, subject
+      it "should return a quantity of 'some'" do
+        assert_equal "some", subject.quantity
+      end
+
+      it "should have no units" do
+        assert_nil subject.unit
       end
     end
 
     describe "when string has divider with whitespace on either side" do
       let(:str) { " % " }
 
-      it "should return a Some" do
-        assert_kind_of Some, subject
+      it "should return a quantity of 'some'" do
+        assert_equal "some", subject.quantity
+      end
+
+      it "should have no units" do
+        assert_nil subject.unit
       end
     end
 
