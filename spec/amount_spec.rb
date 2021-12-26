@@ -119,8 +119,8 @@ describe Amount do
     describe "when no unit is provided" do
       let(:str) { "three" }
 
-      it "should have a blank unit" do
-        assert_empty subject.unit
+      it "should have a nil unit" do
+        assert_nil subject.unit
       end
     end
 

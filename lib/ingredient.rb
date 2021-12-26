@@ -14,17 +14,11 @@ class Ingredient
 
   def self.from_cooklang(str)
     name, amount = str.split("{")
-    if amount
-      new(
-        name,
-        Amount.from_cooklang(amount.sub("}", "")),
-      )
-    else
-      new(
-        name,
-        Some.new,
-      )
-    end
+
+    new(
+      name,
+      Amount.from_cooklang(amount.to_s.sub("}", "")),
+    )
   end
 
   def to_s
