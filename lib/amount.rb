@@ -33,7 +33,6 @@ class Amount
     end
   end
 
-  # TODO: Handle no quantity and no units for timer case??
   def self.from_cooklang(str, default_quantity: "")
     quantity, unit = str.split("%").map(&:strip)
     if quantity.blank? && unit.blank?
