@@ -12,7 +12,10 @@ describe Recipe do
       tests = tests.select { |_, t| t.fetch("focus", false) }
     end
     tests.each do |name, test|
+      skip_reason = test["skip"]
       it(name) do
+        skip(skip_reason) if skip_reason
+
         assert_equal(
           test.fetch("result"),
           Recipe.from_cooklang(name, test.fetch("source")).to_h,
