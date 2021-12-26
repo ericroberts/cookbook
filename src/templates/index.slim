@@ -1,4 +1,5 @@
 ul
   - each do |recipe|
-    li.mb-8
-      a.text-5xl.leading-none.font-extrabold.tracking-tight class="hover:shadow-link" href="/recipes/#{recipe.slug}" = recipe.title
+    li.p-6.border-b-2.border-slate-300 class="last-of-type:border-0"
+      a.text-5xl.leading-none.font-extrabold.tracking-tight class="hover:shadow-link"href="/recipes/#{recipe.slug}"
+        = recipe.title
