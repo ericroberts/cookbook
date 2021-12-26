@@ -17,7 +17,7 @@ class Amount
     3/4r => "¾",
   }
 
-  def self.format_fraction(number)
+  def self.format_quantity(number)
     fix, frac = number.rationalize(0.01).divmod(1)
     fraction = FRACTIONS[frac]
     if fraction
@@ -56,7 +56,7 @@ class Amount
 
   def to_s
     if quantity.is_a?(Numeric)
-      "#{self.class.format_fraction(quantity)} #{unit}"
+      "#{self.class.format_quantity(quantity)} #{unit}"
     else
       "#{quantity} #{unit}"
     end
