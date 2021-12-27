@@ -43,6 +43,18 @@ describe Amount do
     it "should return a decimal value when it doesn't have a matching fraction" do
       assert_equal "1.6", Amount.format_quantity(1.6)
     end
+
+    it "should convert a rational that represents a non matching fraction to a string of a float" do
+      assert_equal "1.4", Amount.format_quantity(Rational("1.4"))
+    end
+
+    it "should convert a rational that represents an integer to an integer (as a string)" do
+      assert_equal "9", Amount.format_quantity(9/1r)
+    end
+
+    it "should represent an integer as a string" do
+      assert_equal "123", Amount.format_quantity(123)
+    end
   end
 
   describe ".from_cooklang" do

@@ -18,18 +18,17 @@ class Amount
   }
 
   def self.format_quantity(number)
-    fix, frac = number.rationalize(0.01).divmod(1)
-    fraction = FRACTIONS[frac]
-    if fraction
-      if fix != 0
-        [fix, FRACTIONS[frac]].join
-      else
-        FRACTIONS[frac]
-      end
-    elsif number.is_a?(Rational) && number.denominator == 1
-      number.to_i
-    else
+    quotient, modulus = number.rationalize(0.01).divmod(1)
+    fraction_str = FRACTIONS[modulus]
+
+    if modulus > 0 && fraction_str && quotient == 0
+      fraction_str
+    elsif modulus > 0 && fraction_str
+      [quotient, fraction_str].join
+    elsif modulus > 0
       number.to_f.to_s
+    else
+      number.to_i.to_s
     end
   end
 
