@@ -22,7 +22,7 @@ class Ingredient
   end
 
   def to_s
-    "#{name}"
+    "#{name} (#{amount})"
   end
 
   def to_h
