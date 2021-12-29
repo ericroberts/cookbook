@@ -2,9 +2,7 @@ require "sinatra"
 require "pry"
 require "builder"
 
-before do
-  Builder.build
-end
+Builder.build
 
 get "/styles.css" do
   send_file "dist/styles.css"
