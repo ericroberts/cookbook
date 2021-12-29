@@ -5,6 +5,10 @@ h1.text-6xl.leading-none.font-extrabold.tracking-tight.mb-16 = title
 
 h2.leading-none.font-extrabold.tracking-tight.text-3xl.mb-4 Ingredients
 
+label.block.border.border-slate-300.rounded.shadow.flex.mb-2
+  span.bg-slate-100.text-gray-700.py-2.px-3.tracking-tight.font-bold.rounded-l.border-r.border-slate-200 Recipe multiplier
+  input.appearance-none.flex-1.py-2.px-3.text-gray-700.bg-transparent.leading-tight class="focus:outline-none focus:shadow-outline" type="number" step=".25" id="multiplier" value="1"
+
 ul.flow-root.mb-16
   - ingredients.each do |ingredient|
     li.border-b-2.border-slate-300 class="last-of-type:border-0"

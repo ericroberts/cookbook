@@ -4,6 +4,10 @@ require "builder"
 
 Builder.build
 
+get "/js/recipe.js" do
+  send_file "dist/js/recipe.js"
+end
+
 get "/styles.css" do
   send_file "dist/styles.css"
 end

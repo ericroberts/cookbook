@@ -28,5 +28,8 @@ class Builder
 
     puts "Generating CSS"
     puts system("npx tailwindcss -i ./src/input.css -o ./dist/styles.css")
+
+    puts "Generating JS"
+    puts system("npx webpack")
   end
 end
