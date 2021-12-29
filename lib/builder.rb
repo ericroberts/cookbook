@@ -25,11 +25,5 @@ class Builder
       File.write("dist/recipes/#{recipe.slug}/index.html", layout.render { recipe.render })
       puts "#{recipe.title} written"
     end
-
-    puts "Generating CSS"
-    puts system("npx tailwindcss -i ./src/input.css -o ./dist/styles.css")
-
-    puts "Generating JS"
-    puts system("npx webpack")
   end
 end
