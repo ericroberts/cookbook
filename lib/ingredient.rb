@@ -1,9 +1,12 @@
+require "forwardable"
+
 require "amount"
 require "scan"
 require "step"
 
 class Ingredient
   extend Scan
+  extend Forwardable
 
   def initialize(name, amount)
     @name = name
@@ -11,6 +14,8 @@ class Ingredient
   end
 
   attr_reader :name, :amount
+
+  def_delegators :amount, :quantity, :unit
 
   def self.from_cooklang(str)
     name, amount = str.split("{")
@@ -32,4 +37,3 @@ class Ingredient
     }.merge(amount.to_h)
   end
 end
-

@@ -10,7 +10,8 @@ ul.flow-root.mb-16
     li.border-b-2.border-slate-300 class="last-of-type:border-0"
       dl.flex.font-extralight.text-xl
         dt.flex-1.py-2 = ingredient.name
-        dd.py-2 = ingredient.amount
+        dd.py-2.amount data-quantity=ingredient.quantity.to_f data-unit=ingredient.unit
+          = ingredient.amount
 
 h2.leading-none.font-extrabold.tracking-tight.text-3xl.mb-4 Steps
 
