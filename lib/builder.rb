@@ -6,8 +6,6 @@ require "recipe_builder"
 
 class Builder
   def self.build
-    FileUtils.remove_dir("dist") if File.exist?("dist")
-
     layout = Slim::Template.new("src/templates/layout.slim")
 
     recipes = Dir.glob("src/recipes/*.cook").map do |f|
