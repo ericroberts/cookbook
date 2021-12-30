@@ -1,8 +1,4 @@
 require "sinatra"
-require "pry"
-require "builder"
-
-Builder.build
 
 get "/js/recipe.js" do
   send_file "dist/js/recipe.js"

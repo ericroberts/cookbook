@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-rerun 'ruby -Ilib server.rb' --ignore 'dist/**/*' --pattern '**/*.{rb,js,scss,sass,html,md,slim,ts}'

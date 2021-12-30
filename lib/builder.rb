@@ -2,6 +2,7 @@ require "fileutils"
 require "slim"
 
 require "recipe"
+require "recipe_builder"
 
 class Builder
   def self.build
@@ -21,9 +22,7 @@ class Builder
     puts "Index written"
 
     recipes.each do |recipe|
-      FileUtils.mkdir_p("dist/recipes/#{recipe.slug}")
-      File.write("dist/recipes/#{recipe.slug}/index.html", layout.render { recipe.render })
-      puts "#{recipe.title} written"
+      RecipeBuilder.build(recipe, layout)
     end
   end
 end
