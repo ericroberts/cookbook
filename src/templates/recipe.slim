@@ -27,5 +27,4 @@ h2.leading-none.font-extrabold.tracking-tight.text-3xl.mb-4 Steps
 
 ul.list-disc.ml-4
   - steps.each do |step|
-    li.mb-4.text-l.leading-relaxed.font-light
-      = step.description
+    == Slim::Template.new("src/templates/step.slim").render(step)
