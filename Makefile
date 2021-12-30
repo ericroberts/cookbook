@@ -1,4 +1,4 @@
-.PHONY: all assets
+.PHONY: all
 
 all:
 	bundle exec ruby -Ilib build.rb
