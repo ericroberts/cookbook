@@ -1,4 +1,5 @@
 require "active_support/core_ext/object/blank"
+require "fractional"
 
 class Amount
   def initialize(quantity, unit = nil)
@@ -7,30 +8,6 @@ class Amount
   end
 
   attr_reader :quantity, :unit
-
-  FRACTIONS = {
-    1/8r => "⅛",
-    1/4r => "¼",
-    1/3r => "⅓",
-    1/2r => "½",
-    2/3r => "⅔",
-    3/4r => "¾",
-  }
-
-  def self.format_quantity(number)
-    quotient, modulus = number.rationalize(0.01).divmod(1)
-    fraction_str = FRACTIONS[modulus]
-
-    if modulus > 0 && fraction_str && quotient == 0
-      fraction_str
-    elsif modulus > 0 && fraction_str
-      [quotient, fraction_str].join
-    elsif modulus > 0
-      number.to_f.to_s
-    else
-      number.to_i.to_s
-    end
-  end
 
   def self.from_cooklang(str, default_quantity: "")
     quantity, unit = str.split("%").map(&:strip)
@@ -55,7 +32,7 @@ class Amount
 
   def to_s
     if quantity.is_a?(Numeric)
-      "#{self.class.format_quantity(quantity)} #{unit}"
+      "#{Fractional.new(quantity).to_s(mixed_number: true)} #{unit}"
     else
       "#{quantity} #{unit}"
     end
