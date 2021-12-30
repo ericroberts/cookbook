@@ -1,7 +1,8 @@
-nav.mb-4.pb-2
-  a.leading-none.font-extrabold.tracking-tight class="hover:shadow-link" href="/" ← Back to Recipes
+header.mb-10.pb-10.border-b.border-slate-300
+  nav.mb-4.pb-2
+    a.leading-none.font-extrabold.tracking-tight class="hover:shadow-link" href="/" ← Back to Recipes
 
-h1.text-5xl.leading-none.font-extrabold.tracking-tight.mb-10.pb-10.border-b-2.border-slate-300 = title
+  h1.text-5xl.leading-none.font-extrabold.tracking-tight = title
 
 h2.leading-none.font-extrabold.tracking-tight.text-3xl.mb-4 Ingredients
 
@@ -16,7 +17,7 @@ label#multiplier-block.block.border.border-slate-300.rounded.shadow.flex.mb-2
 
 ul.flow-root.mb-16
   - ingredients.each do |ingredient|
-    li.border-b-2.border-slate-300 class="last-of-type:border-0"
+    li.border-b.border-slate-300 class="last-of-type:border-0"
       dl.flex.font-extralight.text-xl
         dt.flex-1.py-2 = ingredient.name
         dd.py-2.amount data-quantity=ingredient.quantity.to_f data-unit=ingredient.unit
