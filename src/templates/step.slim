@@ -1,9 +1,12 @@
 li.mb-4.text-l.leading-relaxed.font-light
   - parts.each do |part|
     - if part.is_a?(Ingredient)
-      = "#{part.name} ("
-      span.amount data-quantity=part.quantity.to_f data-unit=part.unit
-        = part.amount
-      = ")"
+      - if part.quantity.is_a?(Numeric)
+        = "#{part.name} ("
+        span.amount data-quantity=part.quantity.to_f data-unit=part.unit
+          = part.amount
+        = ")"
+      - else
+        = part.to_s
     - else
       = part
