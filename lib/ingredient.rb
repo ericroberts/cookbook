@@ -36,4 +36,8 @@ class Ingredient
       "name" => name,
     }.merge(amount.to_h)
   end
+
+  def ==(other)
+    other.is_a?(Ingredient) && other.name == name && other.amount == amount
+  end
 end
