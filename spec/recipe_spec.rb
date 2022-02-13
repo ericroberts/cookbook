@@ -108,6 +108,21 @@ describe Recipe do
           ).to_h,
         )
       end
+
+      it "should parse a url in metadata" do
+        assert_equal(
+          {
+            "steps" => [],
+            "metadata" => {
+              "source" => "https://google.com"
+            },
+          },
+          Recipe.from_cooklang(
+            "Recipe title",
+            ">> source: https://google.com",
+          ).to_h,
+        )
+      end
     end
   end
 

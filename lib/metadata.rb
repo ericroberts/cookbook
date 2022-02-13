@@ -7,7 +7,7 @@ class Metadata
   attr_reader :key, :value
 
   def self.from_cooklang(str)
-    key, value = str.split(":").map(&:strip)
+    key, value = str.split(":", 2).map(&:strip)
     new(key.sub(/\A>>\s?/, ""), value)
   end
 end
