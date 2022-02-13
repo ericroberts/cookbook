@@ -1,7 +1,6 @@
 source "https://rubygems.org"
 
 gem "activesupport"
-gem "filewatcher"
 gem "fractional"
 gem "minitest-reporters"
 gem "pry"
