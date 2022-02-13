@@ -28,3 +28,9 @@ h2.leading-none.font-extrabold.tracking-tight.text-3xl.mb-4 Steps
 ul.list-disc.ml-4
   - steps.each do |step|
     == Slim::Template.new("src/templates/step.slim").render(step)
+
+- url = metadata.find { |m| m.key == "source" }&.value
+- if url
+  footer.border-t.border-slate-300.pt-5 class="dark:border-dracula-current-line"
+    a.leading-none.font-extrabold.tracking-tight class="hover:shadow-link" href=url
+      = "→ Source recipe"
