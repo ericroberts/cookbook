@@ -20,12 +20,8 @@ ul.flow-root.mb-10
     li.border-b.border-slate-300 class="last-of-type:border-0 dark:border-dracula-current-line"
       dl.flex.font-extralight.text-xl
         dt.flex-1.py-2 = ingredient.name
-        - if ingredient.quantity.is_a?(Numeric)
-          dd.py-2.amount data-quantity=ingredient.quantity.to_f data-unit=ingredient.unit
-            = ingredient.amount
-        - else
-          dd.py-2
-            = ingredient.amount
+        dd.py-2
+          == ingredient.amount.map(&:to_html).map(&:strip).join(", ")
 
 h2.leading-none.font-extrabold.tracking-tight.text-3xl.mb-4 Steps
 

@@ -41,7 +41,9 @@ class Recipe
   end
 
   def ingredients
-    steps.flat_map(&:ingredients)
+    steps.flat_map(&:ingredients).group_by(&:name).map do |name, is|
+      Ingredient.new(name, is.map(&:amount))
+    end
   end
 
   def to_h

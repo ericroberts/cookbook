@@ -1,5 +1,6 @@
 require "active_support/core_ext/object/blank"
 require "fractional"
+require "erb"
 
 class Amount
   def initialize(quantity, unit = nil)
@@ -43,5 +44,29 @@ class Amount
       "quantity" => quantity,
       "units" => unit.to_s,
     }
+  end
+
+  def ==(other)
+    other.is_a?(Amount) && other.quantity == quantity && other.unit == unit
+  end
+
+  def to_html
+    return to_s unless quantity.is_a?(Numeric)
+
+    template.result(binding)
+  end
+
+protected
+
+  def template
+    ERB.new <<~HTML
+      <span
+        class="amount"
+        data-quantity="<%= quantity.to_f %>"
+        data-unit="<%= unit %>"
+      >
+        <%= to_s %>
+      </span>
+    HTML
   end
 end
