@@ -41,3 +41,12 @@ class Ingredient
     other.is_a?(Ingredient) && other.name == name && other.amount == amount
   end
 end
+
+class IngredientWithMultipleAmounts
+  def initialize(name, amounts)
+    @name = name
+    @amounts = amounts
+  end
+
+  attr_reader :name, :amounts
+end

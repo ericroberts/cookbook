@@ -2,6 +2,7 @@ require "active_support/core_ext/object/blank"
 require "pathname"
 require "slim"
 
+require "ingredient"
 require "line"
 
 class Recipe
@@ -42,7 +43,7 @@ class Recipe
 
   def ingredients
     steps.flat_map(&:ingredients).group_by(&:name).map do |name, is|
-      Ingredient.new(name, is.map(&:amount))
+      IngredientWithMultipleAmounts.new(name, is.map(&:amount))
     end
   end
 

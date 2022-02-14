@@ -21,7 +21,7 @@ ul.flow-root.mb-10
       dl.flex.font-extralight.text-xl
         dt.flex-1.py-2 = ingredient.name
         dd.py-2
-          == ingredient.amount.map(&:to_html).map(&:strip).join(", ")
+          == ingredient.amounts.map(&:to_html).map(&:strip).join(", ")
 
 h2.leading-none.font-extrabold.tracking-tight.text-3xl.mb-4 Steps
 
