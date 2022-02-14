@@ -42,11 +42,4 @@ class Ingredient
   end
 end
 
-class IngredientWithMultipleAmounts
-  def initialize(name, amounts)
-    @name = name
-    @amounts = amounts
-  end
-
-  attr_reader :name, :amounts
-end
+IngredientWithMultipleAmounts = Struct.new(:name, :amounts)
