@@ -139,8 +139,8 @@ describe Recipe do
     it "should return a list of the ingredients" do
       assert_equal(
         [
-          Ingredient.new("flour", [Amount.new(100, "g")]),
-          Ingredient.new("water", [Amount.new(0.5, "cup")]),
+          IngredientWithMultipleAmounts.new("flour", [Amount.new(100, "g")]),
+          IngredientWithMultipleAmounts.new("water", [Amount.new(0.5, "cup")]),
         ],
         recipe.ingredients
       )
@@ -156,7 +156,7 @@ describe Recipe do
       it "should group them together" do
         assert_equal(
           [
-            Ingredient.new(
+            IngredientWithMultipleAmounts.new(
               "water",
               [
                 Amount.new(100, "g"),
