@@ -106,4 +106,18 @@ describe Amount do
       end
     end
   end
+
+  describe "#to_s" do
+    subject { amount.to_s }
+    let(:amount) { Amount.new(quantity, unit) }
+
+    describe "when quantity is some and unit is nil" do
+      let(:quantity) { "some" }
+      let(:unit) { nil }
+
+      it "should return just the string 'some' with no whitespace on either side" do
+        assert_equal(quantity, subject.to_s)
+      end
+    end
+  end
 end

@@ -35,7 +35,7 @@ class Amount
     if quantity.is_a?(Numeric)
       "#{Fractional.new(quantity).to_s(mixed_number: true)} #{unit}"
     else
-      "#{quantity} #{unit}"
+      [quantity, unit].compact.join(" ")
     end
   end
 
