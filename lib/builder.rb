@@ -8,9 +8,9 @@ class Builder
   def self.build
     layout = Slim::Template.new("src/templates/layout.slim")
 
-    recipes = Dir.glob("src/recipes/*.cook").map do |f|
+    recipes = Dir.glob("src/recipes/*.cook").map { |f|
       Recipe.from_cookfile(f)
-    end
+    }.sort_by(&:title)
 
     FileUtils.mkdir_p("dist/")
     File.write(
