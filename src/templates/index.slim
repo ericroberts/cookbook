@@ -1,5 +1,5 @@
 ul class="-m-5 md:m-0"
   - each do |recipe|
-    li.p-4.border-b.border-slate-300 class="md:py-4 last-of-type:border-0 dark:border-dracula-current-line"
+    li.p-4.border-b.border-slate-300 class="md:py-4 md:px-0 last-of-type:border-0 dark:border-dracula-current-line"
       a.text-4xl.leading-none.font-extrabold.tracking-tight class="hover:shadow-link md:text-3xl"href="/recipes/#{recipe.slug}"
         = recipe.title
